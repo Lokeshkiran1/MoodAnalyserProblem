@@ -6,42 +6,41 @@ namespace TestingMoodAnalyser
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void GivenMoodHappy_ShouldReturnSad()
         {
             //Arrange
-            string msg = "I am in Happy Mood";
-            string expected = "happy";
+            string expected = "HAPPY";
+            string message = "I am in Happy Mood";
+            MoodAnalyser1 moodAnalyzer = new MoodAnalyser1(message);
 
             //Act
-            MoodAnalyser moodAnalyser = new MoodAnalyser(msg);
-            string actual = moodAnalyser.Mood();
-            //Assert
-            Assert.AreEqual(expected, actual);
-            Console.WriteLine(actual);
-        }
-        [TestMethod]
-        [DataRow(null)]
-        public void GivenHAPPYMoodShouldReturnHappy(string message)
-        {
-            //Arrange
-            string expected = "happy";
-            MoodAnalyser moodAnalyzer = new MoodAnalyser(message);
-
-            //Act
-            string mood = moodAnalyzer.Mood();
+            string mood = moodAnalyzer.AnalyzeMood();
 
             //Assert
             Assert.AreEqual(expected, mood);
         }
+        [TestMethod]
+        [DataRow("I am in Happy Mood")]
+        public void GivenHAPPYMoodShouldReturnHappy(string message)
+        {
+            //Arrange
+            string expected = "HAPPY";
+            MoodAnalyser1 moodAnalyzer = new MoodAnalyser1(message);
 
+            //Act
+            string mood = moodAnalyzer.AnalyzeMood();
+
+            //Assert
+            Assert.AreEqual(expected, mood);
+        }
         [TestMethod]
         public void GivenMoodEmpty_ShouldThrowException()
         {
             try
             {
                 string message = "";
-                MoodAnalyser moodAnalyzer = new MoodAnalyser(message);
-                string mood = moodAnalyzer.Mood();
+                MoodAnalyser1 moodAnalyzer = new MoodAnalyser1(message);
+                string mood = moodAnalyzer.AnalyzeMood();
             }
             catch (MoodAnalyserCustomException e)
             {
@@ -49,14 +48,15 @@ namespace TestingMoodAnalyser
             }
 
         }
+        //Testcase 3.1
         [TestMethod]
         public void GivenMoodNull_ShouldThrowException()
         {
             try
             {
-                string? message = null;
-                MoodAnalyser moodAnalyzer = new MoodAnalyser(message);
-                string mood = moodAnalyzer.Mood();
+                string message = null;
+                MoodAnalyser1 moodAnalyzer = new MoodAnalyser1(message);
+                string mood = moodAnalyzer.AnalyzeMood();
             }
             catch (MoodAnalyserCustomException e)
             {
@@ -64,5 +64,17 @@ namespace TestingMoodAnalyser
             }
 
         }
+        //Testcase 4.1
+        [TestMethod]
+        public void GivenMoodAnalyseClassName_ShouldReturnMoodAnalyseObject()
+        {
+            string message = null;
+            object expected = new MoodAnalyser1(message);
+            object obj = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyser.MoodAnalyser1", "MoodAnalyser1");
+            expected.Equals(obj);
+
+        }
+
+
     }
 }

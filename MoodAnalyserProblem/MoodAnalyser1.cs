@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 
 namespace MoodAnalyserProblem
 {
-    public class MoodAnalyser
+    public class MoodAnalyser1
     {
-        public string message;
-        public MoodAnalyser(string message)
+        private string message;
+        public MoodAnalyser1()
+        {
+
+        }
+        public MoodAnalyser1(string message)
         {
             this.message = message;
         }
 
-        public string Mood()
+        public string AnalyzeMood()
         {
             try
             {
@@ -33,5 +37,5 @@ namespace MoodAnalyserProblem
             }
         }
     }
-    
+
 }
